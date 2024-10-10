@@ -1,8 +1,8 @@
-import React from 'react'
-import { Provider } from 'react-native-paper'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { theme } from './src/core/theme'
+import React from 'react';
+import { Provider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { theme } from './src/core/theme';
 import {
     StartScreen,
     LoginScreen,
@@ -12,13 +12,15 @@ import {
     Home,
     OngProfile,
     Ongs,
+    Denuncia,
     Message,
     MessageUser,
-    Donate
+    Donate,
+    Chat,
+    UserProfile
+} from './src/screens'; // Verifique se 'Denuncia' está exportado corretamente aqui
 
-} from './src/screens'
-
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 export default function App() {
     return (
@@ -40,23 +42,15 @@ export default function App() {
                         name="ResetPasswordScreen"
                         component={ResetPasswordScreen}
                     />
-                    <Stack.Screen
-                        name="Ongs"
-                        component={Ongs} />
-
-                    <Stack.Screen
-                        name="Message"
-                        component={Message} />
-
-                    <Stack.Screen
-                        name="MessageUser"
-                        component={MessageUser} />
-
-                    <Stack.Screen
-                        name="Donate"
-                        component={Donate} />
+                    <Stack.Screen name="Ongs" component={Ongs} />
+                    <Stack.Screen name="Message" component={Message} />
+                    <Stack.Screen name="MessageUser" component={MessageUser} />
+                    <Stack.Screen name="Donate" component={Donate} />
+                    <Stack.Screen name="Chat" component={Chat} />
+                    <Stack.Screen name="Denuncia" component={Denuncia} />
+                    <Stack.Screen name="UserProfile" component={UserProfile} />
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
-    )
+    );
 }

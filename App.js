@@ -17,7 +17,8 @@ import {
     MessageUser,
     Donate,
     Chat,
-    UserProfile
+    UserProfile,
+    About
 } from './src/screens'; // Verifique se 'Denuncia' está exportado corretamente aqui
 
 const Stack = createStackNavigator();
@@ -49,6 +50,7 @@ export default function App() {
                     <Stack.Screen name="Chat" component={Chat} />
                     <Stack.Screen name="Denuncia" component={Denuncia} />
                     <Stack.Screen name="UserProfile" component={UserProfile} />
+                    <Stack.Screen name="About" component={About} />
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

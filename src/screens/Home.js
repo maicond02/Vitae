@@ -57,6 +57,12 @@ class Home extends Component {
                     >
                         <Text style={styles.footerButtonText}>Perfil</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.footerButton}
+                        onPress={() => navigation.navigate('About')}
+                    >
+                        <Text style={styles.footerButtonText}>Sobre</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

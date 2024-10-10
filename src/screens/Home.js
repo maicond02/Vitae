@@ -3,65 +3,58 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableOpacity
 } from 'react-native';
+import PanicButton from '../components/PanicButton'; 
+import SafeButton from '../components/SafeButton'; 
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSafe: true 
+        };
+    }
+
+    handlePanicButtonPress = () => {
+        this.setState({ isSafe: false }); 
+    };
+
+    handleSafeButtonPress = () => {
+        this.setState({ isSafe: true }); 
+    };
 
     render() {
-
         const { navigation } = this.props;
+        const { isSafe } = this.state;
 
         return (
             <View style={styles.container}>
-                {/* Header */}
                 <View style={styles.header}>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('StartScreen')}
-                    >
-                        <Image
-                            source={require('../img/logo.png')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
+                    <Text style={[styles.headerText, !isSafe && styles.headerTextDanger]}>
+                        Botão do Pânico
+                    </Text>
                 </View>
 
-                {/* Conteúdo principal */}
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Bem-vindo à Home!</Text>
+                    <PanicButton isSafe={isSafe} onPress={this.handlePanicButtonPress} />
+                    <Text style={styles.contentText}>
+                        {isSafe 
+                            ? 'Pressione se você está em risco' 
+                            : 'Não se preocupe!\nEstamos entrando em contato'}
+                    </Text>
+                    
+                    {!isSafe && (
+                        <SafeButton onPress={this.handleSafeButtonPress} />
+                    )}
                 </View>
 
-                {/* Footer fixo */}
                 <View style={styles.footer}>
                     <TouchableOpacity
                         style={styles.footerButton}
-                        onPress={() => navigation.navigate('Home')}
+                        onPress={() => navigation.navigate('ConfigurarContato')}
                     >
-                        <Text style={styles.footerButtonText}>Botão do Pânico</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={() => navigation.navigate('Denuncia')}
-                    >
-                        <Text style={styles.footerButtonText}>Denúncia</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={() => navigation.navigate('Chat')}
-                    >
-                        <Text style={styles.footerButtonText}>Chat</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={() => navigation.navigate('UserProfile')}
-                    >
-                        <Text style={styles.footerButtonText}>Perfil</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={() => navigation.navigate('About')}
-                    >
-                        <Text style={styles.footerButtonText}>Sobre</Text>
+                        <Text style={styles.footerButtonText}>Configurar contato seguro</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -72,33 +65,21 @@ class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#D3D3D3',
     },
     header: {
-        marginTop: 30,
+        marginTop: 80,
         height: 55,
-        backgroundColor: '#FFF',
-        flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 5,
-        borderBottomWidth: 0.2,
-        shadowColor: '#000',
-        elevation: 1,
-        borderTopWidth: 2,
-        borderTopColor: 'rgba(0,0,0,0.1)',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0,0,0,0.1)',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
     },
-    logo: {
-        width: 23,
-        height: 23
+    headerText: {
+        fontSize: 36,
+        fontWeight: 'bold',
+        color: '#008000',
+    },
+    headerTextDanger: {
+        color: '#FF0000',
     },
     content: {
         flex: 1,
@@ -106,31 +87,30 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     contentText: {
-        fontSize: 18,
+        fontSize: 24,
+        textAlign: 'center',
         color: '#000',
+        marginBottom: 20, 
     },
     footer: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 60,
+        height: 100,
         backgroundColor: '#FFF',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
         borderTopWidth: 1,
         borderTopColor: 'rgba(0,0,0,0.1)',
-        shadowColor: '#000',
-        elevation: 10,
     },
     footerButton: {
         alignItems: 'center',
+        backgroundColor: '#008000',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
     },
     footerButtonText: {
-        fontSize: 14,
-        color: '#000',
-    }
+        fontSize: 16,
+        color: '#FFF',
+    },
 });
 
 export default Home;

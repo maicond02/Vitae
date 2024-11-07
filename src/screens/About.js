@@ -6,6 +6,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
+import Footer from '../components/Footer'; // importe o Footer
 
 export default function About({ navigation }) {
     return (
@@ -23,36 +24,11 @@ export default function About({ navigation }) {
 
             {/* Conteúdo principal */}
             <View style={styles.content}>
-                <Text style={styles.contentText}>Bem-vindo à Profile!</Text>
+                <Text style={styles.contentText}>Bem-vindo ao footer!</Text>
             </View>
 
-            {/* Footer fixo */}
-            <View style={styles.footer}>
-                <TouchableOpacity
-                    style={styles.footerButton}
-                    onPress={() => navigation.navigate('Home')}
-                >
-                    <Text style={styles.footerButtonText}>Botão do Pânico</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.footerButton}
-                    onPress={() => navigation.navigate('Denuncia')}
-                >
-                    <Text style={styles.footerButtonText}>Denúncia</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.footerButton}
-                    onPress={() => navigation.navigate('Chat')}
-                >
-                    <Text style={styles.footerButtonText}>Chat</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.footerButton}
-                    onPress={() => navigation.navigate('UserProfile')}
-                >
-                    <Text style={styles.footerButtonText}>Perfil</Text>
-                </TouchableOpacity>
-            </View>
+            {/* Componente Footer */}
+            <Footer navigation={navigation} />
         </View>
     );
 }

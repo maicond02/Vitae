@@ -28,6 +28,13 @@ const Footer = ({ navigation }) => {
             >
                 <Text style={styles.footerButtonText}>👤</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.footerButton}
+                onPress={() => navigation.navigate('About')}
+            >
+                <Text style={styles.footerButtonText}>📝</Text>
+            </TouchableOpacity>
         </View>
     );
 };

@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity
-} from 'react-native';
-import PanicButton from '../components/PanicButton'; 
-import SafeButton from '../components/SafeButton'; 
+import { StyleSheet, Text, View } from 'react-native';
+import PanicButton from '../components/PanicButton';
+import Footer from '../components/Footer'; // importe o Footer
 
 class Home extends Component {
     constructor(props) {
@@ -17,11 +12,7 @@ class Home extends Component {
     }
 
     handlePanicButtonPress = () => {
-        this.setState({ isSafe: false }); 
-    };
-
-    handleSafeButtonPress = () => {
-        this.setState({ isSafe: true }); 
+        this.setState((prevState) => ({ isSafe: !prevState.isSafe }));
     };
 
     render() {
@@ -38,25 +29,15 @@ class Home extends Component {
 
                 <View style={styles.content}>
                     <PanicButton isSafe={isSafe} onPress={this.handlePanicButtonPress} />
-                    <Text style={styles.contentText}>
+                    <Text style={[styles.contentText, !isSafe && styles.contentTextAlert]}>
                         {isSafe 
                             ? 'Pressione se você está em risco' 
                             : 'Não se preocupe!\nEstamos entrando em contato'}
                     </Text>
-                    
-                    {!isSafe && (
-                        <SafeButton onPress={this.handleSafeButtonPress} />
-                    )}
                 </View>
 
-                <View style={styles.footer}>
-                    <TouchableOpacity
-                        style={styles.footerButton}
-                        onPress={() => navigation.navigate('ConfigurarContato')}
-                    >
-                        <Text style={styles.footerButtonText}>Configurar contato seguro</Text>
-                    </TouchableOpacity>
-                </View>
+                {/* Componente Footer */}
+                <Footer navigation={navigation} />
             </View>
         );
     }
@@ -65,51 +46,41 @@ class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#D3D3D3',
+        backgroundColor: '#F0F2F5',
+        paddingHorizontal: 16,
     },
     header: {
-        marginTop: 80,
-        height: 55,
-        justifyContent: 'center',
+        marginTop: 60,
+        paddingBottom: 10,
         alignItems: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor: '#DADADA',
     },
     headerText: {
-        fontSize: 36,
-        fontWeight: 'bold',
-        color: '#008000',
+        fontSize: 30,
+        fontWeight: '700',
+        color: '#4CAF50',
+        letterSpacing: 1,
     },
     headerTextDanger: {
-        color: '#FF0000',
+        color: '#FF5252',
     },
     content: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 20,
     },
     contentText: {
-        fontSize: 24,
+        fontSize: 18,
         textAlign: 'center',
-        color: '#000',
-        marginBottom: 20, 
+        color: '#333',
+        marginTop: 20,
+        lineHeight: 26,
     },
-    footer: {
-        height: 100,
-        backgroundColor: '#FFF',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderTopWidth: 1,
-        borderTopColor: 'rgba(0,0,0,0.1)',
-    },
-    footerButton: {
-        alignItems: 'center',
-        backgroundColor: '#008000',
-        padding: 10,
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    footerButtonText: {
-        fontSize: 16,
-        color: '#FFF',
+    contentTextAlert: {
+        color: '#FF5252',
+        fontWeight: '600',
     },
 });
 

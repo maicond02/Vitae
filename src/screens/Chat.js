@@ -16,9 +16,7 @@ export default function Chat({ navigation }) {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('StartScreen')}
                 >
-                    <Image
-                        source={require('../img/logo.png')}
-                        style={styles.logo} />
+                    <Image source={require('../assets/back.png')} style={styles.logo} />
                 </TouchableOpacity>
             </View>
 

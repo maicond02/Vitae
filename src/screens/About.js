@@ -19,7 +19,7 @@ export default function About({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View >
-                <Text style={styles.sectioonAboutTitle}>About Vitae</Text>
+                <Text style={styles.sectioonAboutTitle}>Sobre Vitae</Text>
                 </View>
 
                 <View style={styles.sectionContainer}>

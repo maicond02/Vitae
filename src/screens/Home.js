@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import PanicButton from '../components/PanicButton';
 import Footer from '../components/Footer'; // importe o Footer
 
@@ -22,6 +22,11 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
+                        <Image source={require('../assets/back.png')} style={styles.logo} />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.title}>
                     <Text style={[styles.headerText, !isSafe && styles.headerTextDanger]}>
                         Botão do Pânico
                     </Text>
@@ -47,14 +52,39 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F0F2F5',
-        paddingHorizontal: 16,
+    },
+    title: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginVertical: 10,
     },
     header: {
-        marginTop: 60,
-        paddingBottom: 10,
+        marginTop: 30,
+        height: 55,
+        backgroundColor: '#FFF',
+        flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: '#DADADA',
+        justifyContent: 'space-between',
+        padding: 5,
+        borderBottomWidth: 0.2,
+        shadowColor: '#000',
+        elevation: 1,
+        borderTopWidth: 2,
+        borderTopColor: 'rgba(0,0,0,0.1)',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+    },
+    logo: {
+        width: 24,
+        height: 24,
+    },
+    backButton: {
+        position: 'absolute',
+        left: 20,
     },
     headerText: {
         fontSize: 30,

@@ -3,7 +3,9 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView
+    ScrollView,
+    TouchableOpacity,
+    Image
 } from 'react-native';
 import Footer from '../components/Footer';
 
@@ -11,6 +13,11 @@ export default function About({ navigation }) {
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
             <View style={styles.content}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
+                        <Image source={require('../assets/back.png')} style={styles.logo} />
+                    </TouchableOpacity>
+                </View>
                 <View >
                 <Text style={styles.sectioonAboutTitle}>About Vitae</Text>
                 </View>
@@ -51,7 +58,7 @@ export default function About({ navigation }) {
                     <Text style={styles.contactInfo}>WhatsApp: +55 (11) 91234-5678</Text>
             </View>
             
-            <Footer />
+            <Footer navigation={navigation} />
         </ScrollView>
     );
 }
@@ -64,9 +71,12 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingBottom: 50, // Espaço extra no final
     },
+    logo: {
+        width: 24,
+        height: 24,
+    },
     content: {
-        padding: 20,
-        margin: 10,
+        paddingBottom: 20, // Corrigido para paddingBottom
         backgroundColor: '#ffffff',
         borderRadius: 8,
         shadowColor: '#000',
@@ -74,6 +84,29 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 5,
         elevation: 4,
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#F7F7F7',
+    },
+    header: {
+        marginTop: 30,
+        height: 55,
+        backgroundColor: '#FFF',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 5,
+        borderBottomWidth: 0.2,
+        shadowColor: '#000',
+        elevation: 1,
+        borderTopWidth: 2,
+        borderTopColor: 'rgba(0,0,0,0.1)',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
     },
     title: {
         fontSize: 28,

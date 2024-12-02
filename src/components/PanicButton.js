@@ -1,10 +1,35 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text, Linking } from 'react-native';
 
 const PanicButton = ({ isSafe, onPress }) => {
+    const sendWhatsAppMessage = () => {
+        const phoneNumber = '+5519993904436';
+        const message = isSafe
+            ? 'Estou em segurança, não se preocupe!'
+            : 'Estou em perigo, preciso de ajuda!';
+
+        const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    alert('WhatsApp não está instalado!');
+                }
+            })
+            .catch((err) => console.error('Erro ao abrir WhatsApp:', err));
+    };
+
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.button, isSafe ? styles.safe : styles.danger]}>
-            <Text style={styles.buttonText}>{isSafe ? "Emergência !" : "Estou bem !"}</Text>
+        <TouchableOpacity
+            onPress={() => {
+                onPress();
+                sendWhatsAppMessage();
+            }}
+            style={[styles.button, isSafe ? styles.safe : styles.danger]}
+        >
+            <Text style={styles.buttonText}>{isSafe ? 'Emergência!' : 'Estou bem!'}</Text>
         </TouchableOpacity>
     );
 };
@@ -38,7 +63,6 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontWeight: 'bold',
     },
-    // animação de pulsação usando CSS para efeito visual
     '@keyframes pulse': {
         '0%': {
             transform: [{ scale: 1 }],

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Conectando causa",
+    "name": "Vitae",
     "slug": "simple-login-template",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,10 +23,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.maicond02.simplelogintemplate"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4370e773-d0f5-4fd4-902e-410b804d2bf0"
+      }
     }
   }
 }

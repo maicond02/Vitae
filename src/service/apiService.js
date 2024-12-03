@@ -90,58 +90,7 @@ const deleteData = async (endpoint) => {
         console.error("Erro ao excluir dados:", error);
         throw error;
     }
-};
-
-// Função para buscar dados (GET)
-const loginUser = async (endpoint, login) => {
-    try {
-        console.error("Dados de Login:", login);
-
-        const response = await fetch(`${API_URL}/${endpoint}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",  
-            },
-            body: JSON.stringify(login), // Converte o objeto para JSON
-        });
-
-        if (!response.ok) {
-            throw new Error(`Erro ao buscar dados: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        throw error; // Repassa o erro para o componente que chamou
-    }
-};
-
-
-const registerUser = async (endpoint, login) => {
-    try {
-        console.info("Dados de Register:", login);
-
-        const response = await fetch(`${API_URL}/${endpoint}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",  
-            },
-            body: JSON.stringify(login), // Converte o objeto para JSON
-        });
-
-        if (!response.ok) {
-            throw new Error(`Erro ao buscar dados: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        throw error; // Repassa o erro para o componente que chamou
-    }
-};
-
+}; 
 
 export { service };
 

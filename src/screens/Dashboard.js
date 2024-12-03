@@ -11,7 +11,7 @@ export default function Dashboard({ navigation }) {
             <Logo />
             <Header>Cadastrado com Sucesso</Header>
             <Paragraph>
-                Transforme intenção em ação: um toque para doar, um gesto para mudar o mundo.
+                Seja Bem Vindo ao Vitae.
             </Paragraph>
             <Button
                 mode="outlined"

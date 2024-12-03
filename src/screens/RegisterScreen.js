@@ -11,13 +11,14 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import { registerValidator } from '../helpers/registerValidator'
 
 export default function RegisterScreen({ navigation }) {
     const [name, setName] = useState({ value: '', error: '' })
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const onSignUpPressed = () => {
+    const onSignUpPressed = async () => {
         const nameError = nameValidator(name.value)
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
@@ -27,6 +28,18 @@ export default function RegisterScreen({ navigation }) {
             setPassword({ ...password, error: passwordError })
             return
         }
+ 
+        const status = await registerValidator(name, email, password);
+        if (status === 200) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            })
+        }else{
+            setEmail({ ...email, error: 'Email invalidada' })
+            setPassword({ ...password, error: 'Senha invalidada' })
+        }
+
         navigation.reset({
             index: 0,
             routes: [{ name: 'Dashboard' }],

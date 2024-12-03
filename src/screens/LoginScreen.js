@@ -10,12 +10,13 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import { LoginValidator } from '../helpers/loginValidator'
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const onLoginPressed = () => {
+    const onLoginPressed = async () => {
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
         if (emailError || passwordError) {
@@ -23,10 +24,16 @@ export default function LoginScreen({ navigation }) {
             setPassword({ ...password, error: passwordError })
             return
         }
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home' }],
-        })
+        const token = await LoginValidator(email, password);
+        if (token !== '') {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            })
+        }else{
+            setEmail({ ...email, error: 'Email invalidada' })
+            setPassword({ ...password, error: 'Senha invalidada' })
+        }
     }
 
     return (
